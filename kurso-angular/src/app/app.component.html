@@ -1,1 +1,4 @@
-<app-example-directivas></app-example-directivas>
+
+<div *ngIf="show; then ok else error"></div>
+<ng-template #ok><app-example-directivas></app-example-directivas></ng-template>
+<ng-template #error><p>Nothing to show</p></ng-template>

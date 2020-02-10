@@ -230,3 +230,91 @@ let l = last; let e = even">
 `npm run ng -- g module directivas`
 - dentro creamos el componente "example directive" con 
 `npm run ng -- g component directivas/example-directivas`
+
+## PIPES
+Sus lógicas aplican a los templates. Se utilizan para hacer transformación de datos dentro del propio template sobre la forma de visualización de los datos en la vista.
+por ejemplo tiene pipes par alas fechas. 
+
+### fechas
+`DatePipe: date_expression | date[:format[:timezone[:locale]]]`
+
+{{today | date:'medium'}} //Oct 10, 2017, 5:33:09 PM
+{{today | date:'yyyy-MM-dd'}} //2017-10-10
+
+No convierte la fecha a string sino que altera su visualización pero no su esencia.
+
+
+### decimales
+`DecimalPipe: number_expression | number[:digitInfo[:locale]]`
+{{today | date:'yyyy-MM-dd HH:mm a z':'+0900'}} //2017-12-08 08:20 AM GMT+9
+{{today | date:'medium':'+0900':'fr'}}
+
+
+### currency
+`CurrencyPipe: number_expression | currency[:currencyCode[:display[:digitInfo[:locale]]]]`
+{{34.68 | currency:'EUR':'code'}} //EUR34.68
+{{34.68 | currency:'EUR':'symbol':'1.2-2':'es'}} //34,68€
+
+### porcentaje
+`PercentPipe: number_expression | percent[:digitInfo[:locale]]`
+{{34.68 | percent}} //3.468%
+{{34.68 | percent:'es'}} //3,468%
+
+### uppercase
+
+`UpperCasePipe: string | uppercase`
+{{'Texto de prueba' | uppercase}} //TEXTO DE PRUEBA
+
+
+### messages
+`I18nPluralPipe: expression | i18nPlural:mapping[:locale]`
+```js
+-- En la clase de negocio
+messages: string[];
+messagesMapping: {[key: string]: string};
+
+ngOnInit() {
+this.messages = [];
+this.messagesMapping = {'=0': 'No hay mensajes',
+'=1': 'Tienes un mensaje',
+'other': 'Tienes # mensajes'};
+}
+-- En el template
+{{messages.length | i18nPlural:messagesMapping}} //No hay mensajes
+```
+
+### PIPES PROPIOS
+
+creamos una clase con la decoracíon @pipe, donde lo definimos y luego al usarlo en un componente utilizaremos obligatoriamente *name* que lo identifique y un *pure* que será true o false.
+
+```js
+import {Pipe, PipeTransform} from '@angular/core';
+
+@Pipe({
+name: 'decorator', pure: true
+})
+
+export class DecoratorPipe implements PipeTransform {
+  transform(value: string, dec: string):string{
+  return dec + value + dec
+  }
+}
+```
+Y para utilizarlo:
+```js
+
+@Component({
+selector: 'app',
+template: `Texto: {{texto | decorator:'**'}}` //**Angular**
+})
+
+export class App implements OnInit {
+
+texto: string;
+
+ngOnInit(){
+this.texto = 'Angular';
+}
+}
+```
+OJO: SI CREAS UN PIPE Y NO ESTÁ DENTRO DEL DECLARATION DE NINGÚN MÓDULO

@@ -6,10 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./example-directivas.component.css']
 })
 export class ExampleDirectivasComponent implements OnInit {
-
+  colors: string[];
   constructor() { }
 
   ngOnInit(): void {
+    this.colors = ['red', 'blue', 'green', 'orange', 'salmon', 'purple'];
   }
 
 }

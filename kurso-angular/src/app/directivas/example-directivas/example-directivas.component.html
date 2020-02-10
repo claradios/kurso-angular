@@ -1,1 +1,13 @@
 <p>example-directivas works!</p>
+
+<ul >
+  <li *ngFor="let color of colors; let i = index; let o = odd;
+  let l = last; let e = even"
+  [ngSwitch]="i"
+  [style.color]="color"
+  [ngClass]="{even: e && !l, odd: o && !l, last: l}">
+    <p *ngSwitchCase="1">{{i}} Hi!! I am the {{color}}</p>
+    <p *ngSwitchDefault>{{i}} {{color}}</p>
+  </li>
+</ul>
+
