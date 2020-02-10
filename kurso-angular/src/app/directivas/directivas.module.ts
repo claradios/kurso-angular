@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { ExampleDirectivasComponent } from './example-directivas/example-directivas.component';
 
 
@@ -8,6 +8,9 @@ import { ExampleDirectivasComponent } from './example-directivas/example-directi
   declarations: [ExampleDirectivasComponent],
   imports: [
     CommonModule
+  ],
+  exports: [
+    ExampleDirectivasComponent
   ]
 })
 export class DirectivasModule { }
