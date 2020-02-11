@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { PipesModule } from '../pipes/pipes.module';
 import { ExampleDirectivasComponent } from './example-directivas/example-directivas.component';
 
 
@@ -7,7 +8,8 @@ import { ExampleDirectivasComponent } from './example-directivas/example-directi
 @NgModule({
   declarations: [ExampleDirectivasComponent],
   imports: [
-    CommonModule
+    CommonModule,
+    PipesModule
   ],
   exports: [
     ExampleDirectivasComponent

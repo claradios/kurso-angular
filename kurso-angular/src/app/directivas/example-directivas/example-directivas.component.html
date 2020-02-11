@@ -7,7 +7,7 @@
   [style.color]="color"
   [ngClass]="{even: e && !l, odd: o && !l, last: l}">
     <p *ngSwitchCase="1">{{i}} Hi!! I am the {{color}}</p>
-    <p *ngSwitchDefault>{{i}} {{color}}</p>
+    <p *ngSwitchDefault>{{i}} {{color | uppercase | decorator:'@@'}}</p>
   </li>
 </ul>
 

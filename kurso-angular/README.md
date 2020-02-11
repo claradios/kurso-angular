@@ -318,3 +318,67 @@ this.texto = 'Angular';
 }
 ```
 OJO: SI CREAS UN PIPE Y NO ESTÁ DENTRO DEL DECLARATION DE NINGÚN MÓDULO
+
+vamos a creear un módulo pipes
+`npm run ng -- g module pipes`
+ahora creamos un pipe llamado decorator dentro
+`npm run ng -- g pipe pipes/decorator`
+
+vamos a crear un modulo databinding
+`npm run ng -- g module databinding`
+con dos componentes
+`npm run ng -- g component databinding/mother`
+`npm run ng -- g component databinding/child`
+
+## DATA BINDING
+se prefiere un data binding completamente unidireccional: del template a la lógica, de la lógica al template.
+
+Hay varios:
+
+### INTERPOLACIÓN:
+```js
+@Component({
+selector: 'interpolation',
+template: `<p>
+My favourite number is {{myNumber}}
+</p>`
+})
+
+export class MyFavouriteNumberComponent{
+myNumber:number = 11;
+}
+```
+
+### PROPERTY BINDING: ELEMENT PROPERTY
+```js
+
+@Component({
+selector: 'element-property',
+template: `<p [innerHTML]="'My favourite number is ' + myNumber"></p>`
+})
+export class MyFavouriteNumberComponent{
+myNumber:number = 11;
+}
+```
+### PROPERTY BINDING: DIRECTIVE PROPERTY
+
+```js
+// cuando usamos ngIf sin *
+<template [ngIf]="errorCount > 0">
+<div class="error">
+{{errorCount}} errors detectados
+</div>
+</template>
+// o como hemos visto cuando implementábamos la directiva propia highlight,
+
+<h1 [appHighLight]="'blue'">Se resalta en azul</h1>
+// o cuando hacemos ngClass o style binding:
+
+<div [style.fontSize]="isSpecial ?'x-large' : 'smaller'" >
+Contenido
+</div>
+```
+### PROPERTY BINDING: COMPONENT PROPERTY
+```js
+//INFO DE MADRES A HIJAS
+```
