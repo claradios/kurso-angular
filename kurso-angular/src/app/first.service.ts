@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { SecondService } from './second.service';
 
 @Injectable({
@@ -6,8 +6,9 @@ import { SecondService } from './second.service';
 })
 export class FirstService {
 
-  constructor(private secondService: SecondService) { }
+  constructor(private secondService: SecondService, @Inject('config')private config: any) { }
   getMessage(): any {
-    return this.secondService;
+    return 'Hola hijo desde firstService' + this.config.api + this.secondService.getMessage();
+
   }
 }

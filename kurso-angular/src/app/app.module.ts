@@ -2,7 +2,9 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
-
+const config = {
+  api: 'http://back'
+};
 const ROUTES: Routes = [
   // { path: 'directivas', redirectTo: 'directivas', pathMatch: 'full'},
   // { path: 'databinding', redirectTo: 'databinding', pathMatch: 'full'},
@@ -24,7 +26,9 @@ const ROUTES: Routes = [
     // DatabindingModule,
     RouterModule.forRoot(ROUTES)
   ],
-  providers: [],
+  providers: [
+    {provide: 'config', useValue: config}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
