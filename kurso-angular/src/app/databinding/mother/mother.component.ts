@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { FirstService } from './../../first.service';
 @Component({
   selector: 'app-mother',
@@ -8,7 +9,7 @@ import { FirstService } from './../../first.service';
 export class MotherComponent implements OnInit {
   messageToChild: string;
   messageFromChild: string;
-  constructor(private firstService: FirstService) { }
+  constructor(private firstService: FirstService, private router: Router) { }
 
   ngOnInit(): void {
     this.messageToChild = 'Yo soy tu madre';
@@ -19,4 +20,7 @@ export class MotherComponent implements OnInit {
   onClick() {
     this.messageToChild = this.firstService.getMessage();
   }
+  nav() {
+    this.router.navigate( ['directivas']);
+    }
 }

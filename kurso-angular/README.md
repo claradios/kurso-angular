@@ -449,9 +449,12 @@ imports: [CommonModule, RouterModule.forChild(ROUTES)]
 })
 ```
 
-
 ## LAZY LOADING
 Para poder cargar los módulos por lazy loading, tenemos que entender que los módulos funcionan de forma independiente. 
 Los módulos secundarios parten del vacío en lugar de un path específico.
 Cargamos el módulo a traves de la propiedad *loadChildren* para esto. 
 
+A través del router que ya es provider de por si podemos inyectarlo en el constructor usando "private" y llmarar a un trozo de código.
+
+Crear un servicio que te lleve de databinding a directivas.
+Un botón en databinding que llame a ese servicio y utilice el router para mostarr directivas.
