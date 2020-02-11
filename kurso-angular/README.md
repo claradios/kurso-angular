@@ -329,6 +329,8 @@ vamos a crear un modulo databinding
 con dos componentes
 `npm run ng -- g component databinding/mother`
 `npm run ng -- g component databinding/child`
+crear un servicio
+`npm run ng -- g service first`
 
 ## DATA BINDING
 se prefiere un data binding completamente unidireccional: del template a la lógica, de la lógica al template.
@@ -382,3 +384,74 @@ Contenido
 ```js
 //INFO DE MADRES A HIJAS
 ```
+
+# SERVICIOS E INYECCIÓN DE DEPENDENCIAS
+
+El *inyector* lo que hace es crear la caja de *providers* que pueden ser inyectados a través del *constructor*.
+El constructor se utiliza básicamente para esto.
+
+- Poniéndole en el módulo principal puedo usarlo en todos los otros componentes.
+
+- Si no lo declaro arriba del todo sino dentro de un compomente. Ese elemento inyectado sólo podrá ser utilizado en los elementos que cuelgan de ese arbol.
+
+- los servicios llevan el decorador *@Injectable()*
+
+- La localización siempre es de abajo a arriba. Por eso si los declaro arriba del todo siempmre los va a encontrar. (es decir, se mira desde el componente donde se inyecta, hacia arriba, al padre si no lo encuentra, al padre etc..)
+
+Cómo declaramos un provider: lo más sencillo es con @Injectable()
+```js
+
+import { Injectable } from '@angular/core';
+
+@Injectable({
+providedIn: 'root'
+})
+export class ExampleService {
+
+constructor() { }
+
+}
+```
+Además puedo meter a través de este servicio, mediante el constructor, más servicios.
+
+Para crear un servicio: 
+`npm run ng -- g service first`
+
+
+# ROUTER
+La configuración del router. Vamos a tener primero un objeto con mi ruta principal y una ruta ** que es cuando no encuentra ninguna ruta. Ahí hace un redirect.
+```js
+const ROUTES: Routes = [
+{ path: '', redirectTo: 'tutoriales', pathMatch: 'full' },
+{ path: '**', redirecTo: 'tutoriales'}
+];
+```
+Este objeto se lo pasamos a :
+```js
+@NgModule({
+imports: [
+BrowserModule,
+TutorialesModule,
+RouterModule.forRoot(ROUTES)
+]
+})
+```
+### configuración del router en el módulo secundario.
+(directivas: /directivas)
+```js
+const ROUTES: Routes = [
+{ path: 'tutoriales', component: TutorialesComponent},
+{ path: 'tutoriales/:id', component: TutorialesDetailComponent}
+];
+
+@NgModule({
+imports: [CommonModule, RouterModule.forChild(ROUTES)]
+})
+```
+
+
+## LAZY LOADING
+Para poder cargar los módulos por lazy loading, tenemos que entender que los módulos funcionan de forma independiente. 
+Los módulos secundarios parten del vacío en lugar de un path específico.
+Cargamos el módulo a traves de la propiedad *loadChildren* para esto. 
+

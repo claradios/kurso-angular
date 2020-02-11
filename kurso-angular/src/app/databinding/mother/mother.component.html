@@ -1,1 +1,12 @@
-<p>mother works!</p>
+<div [ngStyle]="{backgroundColor:'lightblue'}">
+    <p>mother works!</p>
+    <button (click)="onClick()">Hola</button>
+
+    <app-child
+    [message]="messageToChild"
+    (reply)="responseFromChild($event)"
+    ></app-child>
+
+    <p>{{messageFromChild}}</p>
+
+</div>
