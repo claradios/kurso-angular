@@ -6,5 +6,6 @@
 <nav>
   <a [routerLink] = "['directivas']">Directivas</a>
   <a [routerLink] = "['databinding']">Databinding</a>
+  <a [routerLink]="['/databinding/clara']" [queryParams]="{q:1}">Query Params</a>
 </nav>
 <router-outlet></router-outlet>

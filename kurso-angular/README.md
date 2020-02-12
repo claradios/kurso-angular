@@ -459,5 +459,17 @@ A través del router que ya es provider de por si podemos inyectarlo en el const
 Crear un servicio que te lleve de databinding a directivas.
 Un botón en databinding que llame a ese servicio y utilice el router para mostarr directivas.
 
-
+## PARAMS Y QUERY PARAMS
 Vas al modulo de databinding y vamos a configurar la ruta para que pueda admitir esa variable dinámica y recuperarla en el hijo para que pueda mostrarla en el template.
+
+NOS SIRVE PARA DEFINIR PARÁMETROS QUE SON OPCIONALES, no son parte del path sino que se añadirán a partir del símbolo ? en la URL.
+
+## RUTAS DE GUARDA
+### CanActivate
+se utilizan como servicio. cuando implementamos el método `CanActivate` tenemos que decir si queremos que esa interacción hace que se pinte el componente o no. Al final devuelve un boolean: true, pasas. false te quedas donde estás. Por ejemplo esto es para el rol de usuarios.
+
+en nuestra ruta añadiríamos, por ejemplo: canActivate[AuthService]
+
+creamos el modulo auth y el servicio auth dentro
+### CanDeactivate
+Es una guarda que se aplica a un componenete en lugar de a una ruta. 
