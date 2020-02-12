@@ -23,4 +23,7 @@ export class MotherComponent implements OnInit {
   nav() {
     this.router.navigate( ['directivas']);
     }
+  nav2() {
+      this.router.navigate(['databinding', '123']);
+    }
 }

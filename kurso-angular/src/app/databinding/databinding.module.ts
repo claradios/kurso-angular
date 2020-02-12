@@ -8,7 +8,8 @@ import { MotherComponent } from './mother/mother.component';
 
 
 const ROUTES: Routes = [
-  { path: '', component: MotherComponent}
+  { path: '', component: MotherComponent},
+  { path: ':child', component: ChildComponent}
   ];
 
 @NgModule({

@@ -458,3 +458,6 @@ A través del router que ya es provider de por si podemos inyectarlo en el const
 
 Crear un servicio que te lleve de databinding a directivas.
 Un botón en databinding que llame a ese servicio y utilice el router para mostarr directivas.
+
+
+Vas al modulo de databinding y vamos a configurar la ruta para que pueda admitir esa variable dinámica y recuperarla en el hijo para que pueda mostrarla en el template.
