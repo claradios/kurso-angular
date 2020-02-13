@@ -502,7 +502,8 @@ postcode: <input type="text" formControlName="postcode"/>
 
 
 ```
-## VALIDACIONES SINCRONAS Y ASINCRONAS DE UN FORMULARIO:
+## VALIDACIONES SINCRONAS DE UN FORMULARIO:
+Las sincronas vienen por defeto y son las de la lista que sigue o unas que te haces tu. Las asíncronas son las que haces tu y siempre devuelven una promesa
 
 - required: se pone cuando queremos que el campo sea obligatorio.
 - min: valida que el valor esté por encima de un valor mínimo.
@@ -538,4 +539,25 @@ static startWithNumber(control: FormControl) {
     }
   }
 }
+```
+## VALIDACIONES ASÍNCRONAS DE UN FORMULARIO:
+
+Son las que te devuelven una promesa. Las meto dentro de un array como tercer argumento del form control. 
+`FormControl(valorPorDefecto,ValidacionesSincronas,ValidacionesAsincronas)`
+Te las haces tú
+```js
+static userTaken(service: UserService) {
+return(control: FormControl) => {
+return new Promise((resolve) => {
+service.checkUser(control.value).subscribe(
+(response) => {
+resolve(null);
+},
+(error) => {
+resolve({ 'userTaken': true });
+}
+);
+});
+};
+};
 ```
