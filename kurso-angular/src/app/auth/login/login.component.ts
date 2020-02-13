@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
           CommonValidator.startWithNumber
         ],
         [CommonValidator.userTaken]),
-      password: new FormControl('', [Validators.required])
+      password: new FormControl('', [Validators.required, Validators.minLength(6)])
     });
   }
   onSend() {

@@ -1,8 +1,27 @@
 <form [formGroup]="form">
+
   <label for="username">Username:</label>
   <input type="text" formControlName="username" id="username" />
+
+  <div *ngIf="form.get('username').dirty && !form.get('username').valid">
+    <p *ngIf="form.get('username').hasError('minlength')">
+      El nombre debe tener al menos 2 caracteres
+    </p>
+    <p *ngIf="form.get('username').hasError('startWithNumber')">
+      El nombre no debe empezar con un número
+    </p>
+    <p *ngIf="form.get('username').hasError('userTaken')">
+      El nombre está repetido
+    </p>
+  </div>
+
   <label for="psw">Password</label>
   <input type="password" formControlName="password" id="psw" />
+  <div *ngIf="form.get('password').dirty && !form.get('password').valid">
+      <p *ngIf="form.get('password').hasError('minlength')">
+        El password debe tener al menos 6 caracteres
+      </p>
+    </div>
   <button [disabled]="!form.valid" (click)="onSend()">Send</button>
 </form>
 {{form.valid}}

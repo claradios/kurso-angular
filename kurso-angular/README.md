@@ -555,9 +555,15 @@ resolve(null);
 },
 (error) => {
 resolve({ 'userTaken': true });
-}
-);
+});
 });
 };
 };
 ```
+## ESTADOS DE UN FORMULARIO
+- • pristine < ⇒ dirty -> es pristine cuando no he escrito aún
+- • untouched < ⇒ touched -> touch está escrito y pincho fuera del input (salgo)
+- • invalid < ⇒ valid -> si es valid o no (de primeras invalid)
+
+- • pending: es de la validación asincrona.
+Esto se ponen en cada input como clases de css. Las podemos usar para dar feedback 
