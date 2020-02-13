@@ -473,3 +473,69 @@ en nuestra ruta añadiríamos, por ejemplo: canActivate[AuthService]
 creamos el modulo auth y el servicio auth dentro
 ### CanDeactivate
 Es una guarda que se aplica a un componenete en lugar de a una ruta. 
+
+
+# FORMULARIOS
+
+el ng-model está empezando a estar en desuso porque da problemas en formularios grandes. Se prefieren los reactivos. A través de los formularios se reciben muchos ataques por lo que son complejos y un dolor de cabeza.
+
+Los *ReactiveForms* son preferidos y va así:
+
+```js
+import {NgModule} from '@angular/core';
+import {ReactiveFormsModule} from '@angular/forms';
+
+@NgModule({
+imports: [ReactiveFormsModule]
+})
+
+template: `
+<form [formGroup]="form">
+Username: <input type="text" formControlName="username"/>
+Password: <input type="password" formControlName="password"/>
+<fieldset formGroupName="address">
+city: <input type="text" formControlName="city"/>
+postcode: <input type="text" formControlName="postcode"/>
+</fieldset>
+<button>Send</button>
+</form>
+
+
+```
+## VALIDACIONES SINCRONAS Y ASINCRONAS DE UN FORMULARIO:
+
+- required: se pone cuando queremos que el campo sea obligatorio.
+- min: valida que el valor esté por encima de un valor mínimo.
+- max: valida que el valor esté por debajo de un valor máximo.
+- minLength: se establece un número mínimo de caracteres para el campo.
+- maxLength: se establece un número máximo de caracteres para el campo.
+- email: valida que el campo cumpla con el formato de email.
+- pattern: se establece que el campo tiene que cumplir con un determinado patrón.
+
+Validators no se importa ni se inyecta
+
+```js
+this.form = new FormGroup({
+  username: new FormControl('',
+    [Validators.required, 
+    Validators.minLength(2),
+    CommonValidator.startWithNumber]),
+  password: new FormControl('',
+    [Validators.required])
+});
+// en el primer parámetro del FormControl que viene '', es el valor por defecto, si pongo algo pues me saldrá algo cuando se inicialice.
+
+import { FormControl } from '@angular/forms';
+//esto lo incorporaremos dentro del array de validaciones SÍNCRONAS.
+export class CommonValidator {
+static startWithNumber(control: FormControl) {
+  let firstChar = control.value.charAt(0);
+  if (firstChar && !isNaN(firstChar)){
+    return {'startWithNumber': true}; 
+    // cuando la validación no pasa -> objeto para saber si tengo que mostrar el mensaje específico para esta validación.
+    } else {
+    return null; // cuando la validación pasa devuelvo NULL, nunca FALSEE
+    }
+  }
+}
+```

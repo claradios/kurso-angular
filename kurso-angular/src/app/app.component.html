@@ -3,9 +3,5 @@
 <ng-template #ok><app-example-directivas></app-example-directivas></ng-template>
 <ng-template #error><p>Nothing to show</p></ng-template>
 <app-mother></app-mother> -->
-<nav>
-  <a [routerLink] = "['directivas']">Directivas</a>
-  <a [routerLink] = "['databinding']">Databinding</a>
-  <a [routerLink]="['/databinding/clara']" [queryParams]="{q:1}">Query Params</a>
-</nav>
+
 <router-outlet></router-outlet>
