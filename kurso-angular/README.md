@@ -567,3 +567,52 @@ resolve({ 'userTaken': true });
 
 - • pending: es de la validación asincrona.
 Esto se ponen en cada input como clases de css. Las podemos usar para dar feedback 
+
+## OBSERVABLES y HTTPClient
+
+Http client ya funciona con observables que son como tuberías que  conectan con el back  cuando hay alguna respuesta puest te la mandan. 
+En el momento que importamos httpclient module ya podemos usarlo. (dnde vayamos a usarlo)
+
+La base URL la podemos dejar fijada de antes con una const config
+
+## Recuperación de datos
+Si mi api me está devolviendo 4 campos pues esos 4 los tengo que transformar en una interface que tenga el nombre de los 4 campos
+```js
+export interface UserDTO {
+  login: string;
+  name: string;
+}
+´´´
+dentro del constructor inyectamos el servicio httpClient. Esto lo podemos hacer porque lo hemos importado en el modulo antes. 
+
+ahora podemos hacer métodos (los get son los más habituales)
+
+´´´js
+import {HttpClient,Response} from '@angular/common/http';
+import {Inject} from '@angular/core';
+@Injectable{
+
+}
+export class ApiProxyService {
+  constructor(private http:HttpClient,
+  @Inject('config') private config){})
+  
+  getUsers(): Observable<UserDTO> {
+    return this.http.get<UserDTO[]>(this.config.api)
+  }
+}
+```
+Aunque see puede NO INYECTES NUNCA EL HTTP CLIENT dentro de un COMPONENT. MÍNIMO EN UN SERVICIO
+
+tienes que usar una variable subscribe para luego hacer unsuscribe() en el ngOnDestroy() para evitar *memory leak*.
+
+## PYPE ASYNC es lo que se prefiere
+No hacer el subscribe sino que directamente le asigno el observable de array users a una variable observable de array users
+
+Este pipe suscribe y desuscribe de forma implícita sin que explícitamente lo pongas tu en el componente. 
+
+## La respuesta no tiene por qué ser json siempre
+
+hacemos un módulo nuevo que se llame chuck con un compoentnte chuck
+en el nav hay que hacer un link que te lleve al componente chuck
+lo tenemos que hacer lazy con /chuck
