@@ -1,3 +1,4 @@
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
@@ -9,7 +10,7 @@ import { AppLayoutComponent } from './layout/app-layout/app-layout.component';
 import { LayoutModule } from './layout/layout.module';
 import { SimpleComponent } from './layout/simple/simple.component';
 const config = {
-  api: 'http://back'
+  api: 'http://localhost:3001/'
 };
 const ROUTES: Routes = [
   {
@@ -50,6 +51,7 @@ const ROUTES: Routes = [
     BrowserModule,
     LayoutModule,
     AuthModule,
+    HttpClientModule,
     RouterModule.forRoot(ROUTES)
   ],
   providers: [

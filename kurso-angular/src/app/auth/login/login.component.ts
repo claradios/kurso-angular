@@ -1,14 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { CommonValidator } from '../../common-validator';
+import { LoginService } from '../login.service';
+import { TokenDTO } from '../token.dto';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
   form: FormGroup;
-  constructor() { }
+  userToken: TokenDTO;
+  sub: Subscription;
+  constructor(private service: LoginService) { }
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -24,6 +30,14 @@ export class LoginComponent implements OnInit {
     });
   }
   onSend() {
-    console.log(this.form.value);
+    this.sub = this.service.getUserToken(this.form.value).subscribe(
+      response => {
+        this.userToken = response;
+        sessionStorage.setItem('token', this.userToken.access_token);
+      },
+      error => console.log(error));
+  }
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 }

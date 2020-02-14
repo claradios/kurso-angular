@@ -10,13 +10,17 @@ import { ChuckService } from '../chuck.service';
 export class ChuckComponent implements OnInit {
 
   quote: Observable<string>;
+  protectedQuote: Observable<string>;
 
   constructor(private service: ChuckService) {}
   ngOnInit(): void {
-    this.quote = this.service.getQuote();
+    this.loadQuote();
   }
   loadQuote() {
     this.quote = this.service.getQuote();
+  }
+  loadProtectedQuote() {
+    this.protectedQuote = this.service.getProtectedQuote();
   }
 
 }

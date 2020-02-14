@@ -616,3 +616,6 @@ Este pipe suscribe y desuscribe de forma implícita sin que explícitamente lo p
 hacemos un módulo nuevo que se llame chuck con un compoentnte chuck
 en el nav hay que hacer un link que te lleve al componente chuck
 lo tenemos que hacer lazy con /chuck
+
+## deberes
+hacer la llamda a la api protegida implementando antes el interceptor de las cabeceras con el bearer token
