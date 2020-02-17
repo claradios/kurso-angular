@@ -619,3 +619,53 @@ lo tenemos que hacer lazy con /chuck
 
 ## deberes
 hacer la llamda a la api protegida implementando antes el interceptor de las cabeceras con el bearer token
+
+# TESTING
+ojo: TDD no es un tipo de test, es una forma de diseñar (haciendo los test primero).
+
+- componentes: (vista de la aplicación ligada al DOM)--> dependen de DOM.
+
+- dominio: negocio y modelo ,adaptadores, pipes--> si los independizamos , facilitamos muchísimo el testing unitario.
+
+- Proxies (acceso a fuentes de datos externas) --> dependen de HTTP.
+
+FAKES: me devuelven información que yo necesito para mi lógica.
+
+Una forma de crear fakes con jasmine es utilizar el método `spyOn()`
+
+## TestBed
+
+Pieza de Angular que nos facilita la implementación de tests unitarios y e2e
+Nos sirve para simular que nuestra aplicación está corriendo (módulos impmortados, providers declarados...)
+
+lo impotamos como módulo `import {TestBed} from '@angular/core/testing'`
+```js
+beforeEach(()=> TestBed.configureTestingModule(
+  {providers: [CaService,
+  {provide: EngineService, userClass:EngineServiceFake}]}
+))
+
+La clase `testBed` lo que tiene es el método test. 
+
+describe ( 'should...',()=> {
+  let carService ...
+})
+```
+
+## Situaciones de Testing
+
+Cuando utilizamos el comando "generate" angular-cli nos incluye un fichero asociado con .spec
+
+## Test de un pipe / servicio sin dependencias
+
+El caso más sencillo de testing que nos podemos encontrar.
+
+## Test de servicio con dependencia HttpClient
+
+Lo importante est testear que la llamada es correcta a la api. La api puede haber cambiado.
+
+## PAGINA CHULISIMA PARA SACAR INTERFACES DEL JSON QUE TE DEVUELVE EL BACK
+
+http://www.jsontots.com/
+
+Configurar router con una nueva ruta, cargarlo lazy y que cargue el nuevo componente list-users.component una vez que nuestro flujo ha pasado los tests.
